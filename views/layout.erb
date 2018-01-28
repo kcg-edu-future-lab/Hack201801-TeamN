@@ -18,6 +18,7 @@
   <nav class="navbar navbar-light bg-light justify-content-between">
     <a href="" class="navbar-brand"><%= escape_html @title || "title" %></a>
     <form action="" class="form-inline">
+      <button id="cathandBtn" class="btn btn-secondary" type="button">猫の手リスト</button>
       <button id="freeBtn" class="btn btn-outline-primary" type="button" data-is-free="<%= @isFree || false %>">
         <%= (@isFree || false) ? "暇" : "忙しい" %>
       </button>
