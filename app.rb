@@ -51,6 +51,7 @@ post "/api/free/set" do #isFreeを送って
   collection = client[:users]
   isFree = params[:isFree]
   collection.update_one({'employeeId' => session[:employeeId]}, {'$set' => {'isFree' => isFree}})
+  return "ok"
 end
 
 get "/logout" do
