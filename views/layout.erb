@@ -18,7 +18,8 @@
   <nav class="navbar navbar-light bg-light justify-content-between">
     <a href="" class="navbar-brand"><%= escape_html @title || "title" %></a>
     <form action="" class="form-inline">
-      <button class="btn btn-outline-primary" type="button">今ヒマ？</button>
+      <button id="freeBtn" class="btn btn-outline-primary" type="button" data-is-free="<%= @isFree || false %>">
+      </button>
       <button class="btn btn-outline-danger" type="button" data-toggle="modal" data-target="#emergencyModal">やべえ</button>
     </form>
   </nav>
@@ -45,8 +46,26 @@
     </div>
   </div>
 </div>
+
 <script>
 $(() => {
+  // ひまボタンの状態を変化
+  $('#freeBtn').on('click', (e) => {
+    const freeBtn = $(e.target);
+
+    if (freeBtn.val('data-is-free') === 'true') {
+      freeBtn
+        .removeClass('btn-outline-primary')
+        .addClass('btn-primary')
+        .text('今ヒマ');
+    } else {
+      freeBtn
+        .removeClass('btn-primary')
+        .addClass('btn-outline-primary')
+        .text('ヒマじゃない');
+    }
+  });
+
   $('#emergencyBtn').on('click', (e) => {
     console.log("yabaiyo");
   });
