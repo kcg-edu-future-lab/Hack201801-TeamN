@@ -57,3 +57,9 @@ get "/logout" do
   session.clear
   redirect '/'
 end
+
+get "/cathandList" do
+  @employee = db.users.find({isFree:true});
+  erb :cathandList
+end
+
