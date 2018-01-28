@@ -8,7 +8,8 @@ get '/' do
 end
 
 get "/cathandList" do
-  @employee = db.users.find({isFree:true});
+  DB = Mongo::Client.new([ '127.0.0.1:27017' ], :database => 'hack')
+  @employee = DB[:users].find({ isFree: true }) || []
   erb :cathandList
 end
 
