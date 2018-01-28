@@ -1,4 +1,3 @@
-
 <table class="table">
   <thead>
     <tr>
@@ -10,9 +9,9 @@
   <tbody>
     <% @employee.each do |e| %>
       <tr>
-        <td><% e.name %></td>
-        <td><% e.isFree %></td>
-        <td><% e.telephon %></td>
+        <td><%= e.name %></td>
+        <td><%= e.isFree ? "ヒマ" : "作業中" %></td>
+        <td><%= e.telephon %></td>
       </tr>
     <% end %>
   </tbody>
