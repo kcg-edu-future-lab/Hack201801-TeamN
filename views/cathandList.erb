@@ -23,7 +23,11 @@
       <% @employee do |employee| %>
         <tr>
           <td><% employee.name %></td>
-          <td><% employee.isFree %></td>
+          <% if employee.isFree == true %>
+            <td>ヒマ</td>
+          <% else %>
+            <td>作業中</td>
+          <% end %>
           <td><% employee.telephon %></td>
         </tr>
       <% end %>
