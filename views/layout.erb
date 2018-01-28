@@ -19,6 +19,7 @@
     <a href="" class="navbar-brand"><%= escape_html @title || "title" %></a>
     <form action="" class="form-inline">
       <button id="freeBtn" class="btn btn-outline-primary" type="button" data-is-free="<%= @isFree || false %>">
+        <%= (@isFree || false) ? "暇" : "忙しい" %>
       </button>
       <button class="btn btn-outline-danger" type="button" data-toggle="modal" data-target="#emergencyModal">やべえ</button>
     </form>
@@ -53,17 +54,21 @@ $(() => {
   $('#freeBtn').on('click', (e) => {
     const freeBtn = $(e.target);
 
-    if (freeBtn.val('data-is-free') === 'true') {
-      freeBtn
-        .removeClass('btn-outline-primary')
-        .addClass('btn-primary')
-        .text('今ヒマ');
-    } else {
+    const isFree = freeBtn.attr('data-is-free') === 'true';
+    if (isFree) {
       freeBtn
         .removeClass('btn-primary')
         .addClass('btn-outline-primary')
         .text('ヒマじゃない');
+    } else {
+      freeBtn
+        .removeClass('btn-outline-primary')
+        .addClass('btn-primary')
+        .text('暇');
     }
+
+    // 
+    freeBtn.attr('data-is-free', !isFree);
   });
 
   $('#emergencyBtn').on('click', (e) => {
