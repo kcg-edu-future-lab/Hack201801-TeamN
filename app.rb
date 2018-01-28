@@ -7,3 +7,8 @@ get '/' do
   erb :index
 end
 
+get "/cathandList" do
+  @employee = db.users.find({isFree:true});
+  erb :cathandList
+end
+
