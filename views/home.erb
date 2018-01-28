@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>push</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/0.0.11/push.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+    <script>
+        const employeeId = "<%= @employeeId %>";
+        const name = " <%= @name %>"
+        Push.Permission.request();
+        $(function(){
+            var ws = new WebSocket("ws://localhost:8888/");
+            ws.onopen = function () {
+                console.log("open");
+                window.setTimeout(function(){
+                    console.log("first");
+                    ws.send(JSON.stringify({isOpenMsg : true,employeeId : employeeId}));
+                },5000);
+            }
+            ws.onmessage = function (event){
+                Push.create('やべぇ！', {
+                　　body: event.data,//'○○さんがマジやべぇです！',
+                　　icon: 'icon.png',
+                　　timeout: 8000, // 通知が消えるタイミング
+                　　vibrate: [100, 100, 100], // モバイル端末でのバイブレーション秒数
+                　　onClick: function() {
+                　　　　console.log(this);
+                　　}
+                });
+            }
+
+            $("button").on("click",function(){
+                ws.send(JSON.stringify({yabee : true, employeeId : employeeId,msg : name}));
+            })
+        });
+
+    </script>
+</head>
+<body>
+    <input type="text" id="name">
+    <button>やべぇ</button>
+</body>
+</html>
