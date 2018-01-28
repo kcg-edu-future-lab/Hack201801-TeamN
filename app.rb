@@ -8,7 +8,7 @@ get '/' do
 end
 
 get "/cathandList" do
-  @employee = db.[users].find({isFree = true})
+  @employee = db.users.find({isFree:true});
   erb :cathandList
 end
 
