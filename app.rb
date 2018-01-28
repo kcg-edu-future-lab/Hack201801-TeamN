@@ -4,6 +4,6 @@ require 'bundler'
 Bundler.require
 
 get '/' do
-  "test"
+  erb :index
 end
 
