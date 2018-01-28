@@ -18,11 +18,11 @@
 <body>
 
   <nav class="navbar navbar-light bg-light justify-content-between">
-    <a href="" class="navbar-brand"><%= escape_html @title || "title" %></a>
+    <a href="/home" class="navbar-brand"><%= escape_html @title || "title" %></a>
     <form action="" class="form-inline">
-      <button id="cathandBtn" class="btn btn-secondary" type="button">猫の手リスト</button>
-      <button id="freeBtn" class="btn btn-outline-primary" type="button" data-is-free="<%= @isFree || false %>">
-        <%= (@isFree || false) ? "ヒマ" : "作業中" %>
+      <button id="cathandBtn" class="btn btn-secondary" type="button" onclick="location.href='/cathandList'">猫の手リスト</button>
+      <button id="freeBtn" class="btn <%= @isFree == "true" ? 'btn-primary' : 'btn-outline-primary' %>" type="button" data-is-free="<%= @isFree == "true" || false %>">
+        <%= (@isFree == "true" || false) ? "ヒマ" : "作業中" %>
       </button>
       <button class="btn btn-outline-danger" type="button" data-toggle="modal" data-target="#emergencyModal">やべえ</button>
     </form>
@@ -53,7 +53,7 @@
 
 <script>
 const employeeId = "<%= @employeeId || "-1"  %>";
-const name = " <%= @name %>"
+const name = " <%= @name || "no name" %>"
 Push.Permission.request();
 
 

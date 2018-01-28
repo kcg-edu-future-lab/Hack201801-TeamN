@@ -30,7 +30,7 @@ EM.run {
             res = Net::HTTP.get(URI.parse(url))
             himas = JSON.parse(res);
 
-            connections.reject{|conn| himas.include?(conn[:employeeId]) == "false" || conn[:ws] == ws }.each{|conn| conn[:ws].send("#{msgObj["msg"]}さんがマジやべぇです！") }
+            connections.reject{|conn| (himas.include?(conn[:employeeId]) == false) || conn[:ws] == ws }.each{|conn| conn[:ws].send("#{msgObj["msg"]}さんがマジやべぇです！") }
         end
     }
   end
