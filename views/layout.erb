@@ -20,7 +20,7 @@
     <form action="" class="form-inline">
       <button id="cathandBtn" class="btn btn-secondary" type="button">猫の手リスト</button>
       <button id="freeBtn" class="btn btn-outline-primary" type="button" data-is-free="<%= @isFree || false %>">
-        <%= (@isFree || false) ? "暇" : "忙しい" %>
+        <%= (@isFree || false) ? "ヒマ" : "作業中" %>
       </button>
       <button class="btn btn-outline-danger" type="button" data-toggle="modal" data-target="#emergencyModal">やべえ</button>
     </form>
@@ -60,12 +60,12 @@ $(() => {
       freeBtn
         .removeClass('btn-primary')
         .addClass('btn-outline-primary')
-        .text('ヒマじゃない');
+        .text('作業中');
     } else {
       freeBtn
         .removeClass('btn-outline-primary')
         .addClass('btn-primary')
-        .text('暇');
+        .text('ヒマ');
     }
 
     // 
