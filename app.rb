@@ -11,7 +11,7 @@ end
 
 before do
   if session[:employeeId] != nil then
-    client = Mongo::Client.new('mongodb://localhost/hat')
+    client = Mongo::Client.new('mongodb://localhost/yabee')
     collection = client[:users]
     user = collection.find({'employeeId' => session[:employeeId]}).first
     @employeeId = session[:employeeId]
@@ -29,7 +29,7 @@ get "/" do
 end
 
 post "/login" do
-  client = Mongo::Client.new('mongodb://localhost/hat')
+  client = Mongo::Client.new('mongodb://localhost/yabee')
   collection = client[:users]
   user = collection.find({'employeeId' => params[:employeeId]}).first
 
@@ -47,7 +47,7 @@ get "/home" do
 end
 
 get "/api/free" do
-  client = Mongo::Client.new('mongodb://localhost/hat')
+  client = Mongo::Client.new('mongodb://localhost/yabee')
   collection = client[:users]
   freeUsers = collection.find({'isFree' => "true"}).inject([]){|us,u|
      us << u[:employeeId]
@@ -56,7 +56,7 @@ get "/api/free" do
 end
 
 post "/api/free/set" do #isFreeを送って
-  client = Mongo::Client.new('mongodb://localhost/hat')
+  client = Mongo::Client.new('mongodb://localhost/yabee')
   collection = client[:users]
   isFree = params[:isFree]
   collection.update_one({'employeeId' => session[:employeeId]}, {'$set' => {'isFree' => isFree}})
@@ -70,14 +70,14 @@ end
 
 get "/cathandList" do
   @title = '猫の手リスト'
-  DB = Mongo::Client.new([ '127.0.0.1:27017' ], :database => 'hat')
+  DB = Mongo::Client.new([ '127.0.0.1:27017' ], :database => 'yabee')
   @employee = DB[:users].find({ isFree: "true" }) || []
   erb :cathandList
 end
 
 get '/fixtures' do
   @title = '備品'
-  DB = Mongo::Client.new([ '127.0.0.1:27017' ], :database => 'hat')
+  DB = Mongo::Client.new([ '127.0.0.1:27017' ], :database => 'yabee')
   @fixtures = DB[:fixtures].distinct('type')
   erb :fixtures
 end
